@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-//    public static void main(String[] args) {
-//
-//        String expression;
-//
-//        try (Scanner input = new Scanner(System.in)) {
-//            expression = input.nextLine();
-//        }
-//
-//        BTreeMath bTreeMath = new BTreeMath(IOHandler.getTokens(expression));
-//        System.out.println(bTreeMath.evaluate());
-//    }
+    // public static void main(String[] args) {
+    //
+    // String expression;
+    //
+    // try (Scanner input = new Scanner(System.in)) {
+    // expression = input.nextLine();
+    // }
+    //
+    // BTreeMath bTreeMath = new BTreeMath(IOHandler.getTokens(expression));
+    // System.out.println(bTreeMath.evaluate());
+    // }
 
     public static void main(String[] args) {
         ArrayList<String> expressions = new ArrayList<>();
         ArrayList<String> keys = new ArrayList<>();
 
-//        read from file multiple lines
+        // read from file multiple lines
         try (Scanner input = new Scanner(new File("input.txt"))) {
             while (input.hasNextLine()) {
                 String expression = input.nextLine();
@@ -45,6 +45,12 @@ public class Main {
             System.out.println("Expression: " + expressions.get(i));
             System.out.println("Expected: " + keys.get(i));
             System.out.println("Result: " + result);
+            // console color
+            if (result.equals(keys.get(i))) {
+                System.out.println("\u001B[32m" + "Correct" + "\u001B[0m");
+            } else {
+                System.out.println("\u001B[31m" + "Incorrect" + "\u001B[0m");
+            }
             System.out.println();
         }
     }
