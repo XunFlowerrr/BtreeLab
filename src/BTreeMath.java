@@ -16,14 +16,9 @@ public class BTreeMath {
             return null;
         }
 
+
         if (expression.get((0)).equals("(")) {
-            int end = 0;
-            for (int i = expression.size() - 1; i >= 0; i--) {
-                if (expression.get(i).equals(")")) {
-                    end = i;
-                    break;
-                }
-            }
+            int end = Utility.getClosureIndex(expression, 0);
 
             if (end + 2 <= expression.size()) {
                 ArrayList<String> leftSubExpression = new ArrayList<>(expression.subList(1, end));
@@ -69,14 +64,8 @@ public class BTreeMath {
                         i++;
                     } else if (i + 1 < expression.size() && expression.get(i + 1).equals("(")) {
 
-                        int end = 0;
+                        int end = Utility.getClosureIndex(expression, i + 1);
 
-                        for (int j = expression.size() - 1; j >= 0; j--) {
-                            if (expression.get(j).equals(")")) {
-                                end = j;
-                                break;
-                            }
-                        }
 
                         ArrayList<String> subExpression = new ArrayList<>(expression.subList(i + 2, end));
                         Node right = buildTree(subExpression);
@@ -91,13 +80,8 @@ public class BTreeMath {
                         i++;
                     } else if (i + 1 < expression.size() && expression.get(i + 1).equals("(")) {
 
-                        int end = 0;
-                        for (int j = expression.size() - 1; j >= 0; j--) {
-                            if (expression.get(j).equals(")")) {
-                                end = j;
-                                break;
-                            }
-                        }
+                        int end = Utility.getClosureIndex(expression, i + 1);
+
 
                         ArrayList<String> subExpression = new ArrayList<>(expression.subList(i + 2, end));
                         Node right = buildTree(subExpression);
@@ -131,7 +115,7 @@ public class BTreeMath {
         double left = evaluate(root.getLeft());
         double right = evaluate(root.getRight());
 
-        return switch ( root.getValue()) {
+        return switch (root.getValue()) {
             case "+" -> left + right;
             case "-" -> left - right;
             case "*" -> left * right;
